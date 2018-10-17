@@ -1,0 +1,12 @@
+/c/server/php7.1/php.exe -d memory_limit=-1
+
+doctrine:schema:update --force - Сделать таблицу с пользователями
+fos:user:create admin admin@admin.ru password - Создать пользователя
+fos:user:promote admin ROLE_ADMIN
+fos:user:create sadmin admin@admin.ru password --super-admin
+fos:user:change-password sadmin password
+
+doctrine:schema:update --force -- Создать изначальную схему с таблицами fos_* и acl_*
+
+doctrine:mapping:import --force App\Entity yml --path=src/Entity
+php app/console doctrine:generate:entities App\Entity\Pay --path=src/Entity - сгенерировать класс энтити по yml
