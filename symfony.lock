@@ -1,4 +1,16 @@
 {
+    "backup-manager/backup-manager": {
+        "version": "1.2.1"
+    },
+    "backup-manager/symfony": {
+        "version": "2.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.1",
+            "ref": "ae7e2e6cebb46c0adede771d3d9b8c540879920c"
+        }
+    },
     "cocur/slugify": {
         "version": "v3.0"
     },
@@ -107,11 +119,17 @@
     "knplabs/knp-menu-bundle": {
         "version": "v2.2.1"
     },
+    "league/flysystem": {
+        "version": "1.0.46"
+    },
     "monolog/monolog": {
         "version": "1.23.0"
     },
     "nikic/php-parser": {
         "version": "v4.0.4"
+    },
+    "nyholm/dsn": {
+        "version": "0.1.0"
     },
     "ocramius/proxy-manager": {
         "version": "2.0.4"

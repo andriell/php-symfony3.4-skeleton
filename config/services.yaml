@@ -5,6 +5,8 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'ru'
+    backup_dir: '%kernel.project_dir%/var/db'
+    mailer_app_sender_address: 'sender@sender.com'
 
 services:
     # default configuration for services in *this* file

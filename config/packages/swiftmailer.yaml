@@ -1,3 +1,19 @@
 swiftmailer:
-    url: '%env(MAILER_URL)%'
-    spool: { type: 'memory' }
+    default_mailer: mailer_app
+    mailers:
+        mailer_app:
+            spool:
+                type: 'file'
+                path: '%kernel.project_dir%/var/mailer/spool'
+            transport: 'smtp'
+            host: ''
+            port: '587'
+            encryption: 'tls'
+            auth_mode: 'login'
+            username: ''
+            password: ''
+            sender_address: '%mailer_app_sender_address%'
+            stream_options:
+                ssl:
+                    verify_peer: false
+                    verify_peer_name: false
