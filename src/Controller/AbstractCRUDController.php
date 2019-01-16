@@ -2,31 +2,27 @@
 /**
  * Created by PhpStorm.
  * User: am_ry
- * Date: 15.10.2018
- * Time: 11:24
+ * Date: 19.11.2018
+ * Time: 16:05
  */
 
 namespace App\Controller;
 
 use App\Service\Repository;
+use App\Service\Vtb;
+use App\Service\VtbApi;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManager;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as AC;
+use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class AbstractController extends AC
+class AbstractCRUDController extends CRUDController
 {
-    public static function getSubscribedServices()
-    {
-        $r = parent::getSubscribedServices();
-        $r['app_repository'] = '?' . Repository::class;
-        return $r;
-    }
-
     /**
      * @return Session
      */
-    public function getSession() {
+    protected function getSession()
+    {
         return $this->get('session');
     }
 
@@ -51,6 +47,6 @@ class AbstractController extends AC
      */
     protected function getRepository()
     {
-        return $this->container->get('app_repository');
+        return $this->get(Repository::class);
     }
 }

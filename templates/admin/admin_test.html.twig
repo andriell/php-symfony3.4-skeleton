@@ -1,0 +1,85 @@
+{% extends '@SonataAdmin/standard_layout.html.twig' %}
+
+{% block sonata_admin_content %}
+    <div class="box">
+        <div class="box-header with-border">
+            <h2 class="box-title">Дата и время</h2>
+        </div>
+        <div class="box-body">
+            <table class="table-hover table-condensed table-bordered">
+                <thead>
+                <tr>
+                    <td>Название</td>
+                    <td>Значение</td>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for prop in property %}
+                        <tr>
+                        <td>{{ prop.name }}</td>
+                        <td>{{ prop.value }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="box">
+        <div class="box-header with-border">
+            <h2 class="box-title">Блокировки</h2>
+        </div>
+        <div class="box-body">
+            <table class="table-hover table-condensed table-bordered">
+            <thead>
+            <tr>
+                <td>Заблокированный pid</td>
+                <td>Заблокированный пользователь</td>
+                <td>Блокирующий pid</td>
+                <td>Блокирующий пользователь</td>
+                <td>Заблокированный запрос</td>
+                <td>Запрос в блокирующем процессе</td>
+            </tr>
+            </thead>
+            <tbody>
+                {% for b in bloc %}
+                    <tr>
+                    <td>{{ b.blocked_pid }}</td>
+                    <td>{{ b.blocked_user }}</td>
+                    <td>{{ b.blocking_pid }}</td>
+                    <td>{{ b.blocking_user }}</td>
+                    <td>{{ b.blocked_statement }}</td>
+                    <td>{{ b.current_statement_in_blocking_process }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </div>
+    <div class="box">
+        <div class="box-header with-border">
+            <h2 class="box-title">Активные запросы</h2>
+        </div>
+        <div class="box-body">
+            <table class="table-hover table-condensed table-bordered">
+            <thead>
+            <tr>
+                <td>pid</td>
+                <td>Время</td>
+                <td>Пользователь</td>
+                <td>Запрос</td>
+            </tr>
+            </thead>
+            <tbody>
+                {% for q in query %}
+                    <tr>
+                    <td>{{ q.pid }}</td>
+                    <td>{{ q.age }}</td>
+                    <td>{{ q.usename }}</td>
+                    <td>{{ q.query }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </div>
+{% endblock %}
