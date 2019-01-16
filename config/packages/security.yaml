@@ -39,7 +39,7 @@ security:
                     path:           /admin/logout
                     target:         /admin/login
                 anonymous:          true
-
+                switch_user:        true
             # -> end custom configuration
 
             # default login area for standard users

@@ -5,6 +5,7 @@
         "php": "^7.0.8",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-intl": "*",
         "backup-manager/symfony": "^2.1",
         "friendsofsymfony/user-bundle": "^2.1",
         "gregwar/captcha": "^1.1",
