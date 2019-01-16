@@ -8,6 +8,7 @@
 
 namespace App\Command;
 
+use App\Service\Repository;
 use BackupManager\Manager;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -38,5 +39,13 @@ abstract class BaseCommand extends ContainerAwareCommand
     protected function getBackupManager()
     {
         return $this->getContainer()->get('backup_manager');
+    }
+
+    /**
+     * @return Repository
+     */
+    protected function getRepository()
+    {
+        return $this->getContainer()->get(Repository::class);
     }
 }

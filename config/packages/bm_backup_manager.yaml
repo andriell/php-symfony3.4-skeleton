@@ -1,7 +1,7 @@
 # See full config at https://github.com/backup-manager/symfony
 bm_backup_manager:
     database:
-        development:
+        db:
             dsn: '%env(resolve:DATABASE_URL)%'
     storage:
         local:
