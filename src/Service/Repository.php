@@ -52,7 +52,7 @@ class Repository
 
 
     /**
-     * @return UserRepository
+     * @return EntityRepository
      */
     public function getUser()
     {
@@ -62,25 +62,9 @@ class Repository
     /**
      * @return User
      */
-    public function getReferencePay($id)
+    public function getReferenceUser($id)
     {
         return $this->getEm()->getReference(User::class, $id);
-    }
-
-    /**
-     * @return PayStatus
-     */
-    public function getReferencePayStatus($id)
-    {
-        return $this->getEm()->getReference('App:PayStatus', $id);
-    }
-
-    /**
-     * @return PayType
-     */
-    public function getReferencePayType($id)
-    {
-        return $this->getEm()->getReference('App:PayType', $id);
     }
 
     /**
