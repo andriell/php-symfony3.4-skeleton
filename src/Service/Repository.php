@@ -8,6 +8,7 @@
 
 namespace App\Service;
 
+use App\Application\Sonata\UserBundle\Entity\Group;
 use App\Application\Sonata\UserBundle\Entity\User;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityManager;
@@ -50,7 +51,6 @@ class Repository
         return $repository;
     }
 
-
     /**
      * @return EntityRepository
      */
@@ -65,6 +65,22 @@ class Repository
     public function getReferenceUser($id)
     {
         return $this->getEm()->getReference(User::class, $id);
+    }
+
+    /**
+     * @return EntityRepository
+     */
+    public function getGroup()
+    {
+        return $this->getRepository(Group::class);
+    }
+
+    /**
+     * @return Group
+     */
+    public function getReferenceGroup($id)
+    {
+        return $this->getEm()->getReference(Group::class, $id);
     }
 
     /**
