@@ -31,7 +31,12 @@ class AbstractCRUDController extends CRUDController
      */
     protected function getEm()
     {
-        return $this->get('doctrine')->getEntityManager();
+        /** @var EntityManager $em */
+        $em = $this->get('doctrine')->getEntityManager();
+        if (!$em->isOpen()) {
+            $em = $em->create($em->getConnection(), $em->getConfiguration());
+        }
+        return $em;
     }
 
     /**

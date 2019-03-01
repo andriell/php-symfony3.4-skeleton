@@ -35,7 +35,12 @@ class Repository
      */
     protected function getEm()
     {
-        return $this->container->get('doctrine')->getEntityManager();
+        /** @var EntityManager $em */
+        $em = $this->container->get('doctrine')->getEntityManager();
+        if (!$em->isOpen()) {
+            $em = $em->create($em->getConnection(), $em->getConfiguration());
+        }
+        return $em;
     }
 
     /**

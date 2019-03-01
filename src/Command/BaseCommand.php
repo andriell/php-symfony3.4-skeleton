@@ -20,7 +20,12 @@ abstract class BaseCommand extends ContainerAwareCommand
      */
     protected function getEm()
     {
-        return $this->getContainer()->get('doctrine')->getEntityManager();
+        /** @var EntityManager $em */
+        $em = $this->getContainer()->get('doctrine')->getEntityManager();
+        if (!$em->isOpen()) {
+            $em = $em->create($em->getConnection(), $em->getConfiguration());
+        }
+        return $em;
     }
 
     /**
