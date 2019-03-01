@@ -10,3 +10,5 @@ doctrine:schema:update --force -- Создать изначальную схем
 
 doctrine:mapping:import --force App\Entity yml --path=src/Entity
 php app/console doctrine:generate:entities App\Entity\Pay --path=src/Entity - сгенерировать класс энтити по yml
+doctrine:migrations:diff - создать миграцию для БД
+doctrine:migrations:generate - создать пустую миграцию для БД
