@@ -27,6 +27,10 @@ class TestDbCommand extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $lock = $this->createLock();
+        if (!$lock->acquire()) {
+            throw new \Exception('Command ' . $this->getName(). ' already running. Ignore launch another one.');
+        }
         $rows = $this->getEm()->getConnection()->fetchAll('SELECT version() as version;');
         $output->writeln($rows[0]['version']);
     }

@@ -12,6 +12,8 @@ use App\Service\Repository;
 use BackupManager\Manager;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Lock\Factory;
+use Symfony\Component\Lock\Store\FlockStore;
 
 abstract class BaseCommand extends ContainerAwareCommand
 {
@@ -36,6 +38,16 @@ abstract class BaseCommand extends ContainerAwareCommand
     protected function getParameter($name, $default = null)
     {
         return $this->getContainer()->hasParameter($name) ? $this->getContainer()->getParameter($name) : $default;
+    }
+
+    /**
+     * @return \Symfony\Component\Lock\Lock
+     */
+    protected function createLock()
+    {
+        $flockStore = new FlockStore(sys_get_temp_dir());
+        $factory = new Factory($flockStore);
+        return $factory->createLock($this->getName());
     }
 
     /**

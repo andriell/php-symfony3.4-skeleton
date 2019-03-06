@@ -27,8 +27,8 @@ class DbBackupCommand extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $lockHandler = new LockHandler($this->getName());
-        if (!$lockHandler->lock()) {
+        $lock = $this->createLock();
+        if (!$lock->acquire()) {
             throw new \Exception('Command ' . $this->getName(). ' already running. Ignore launch another one.');
         }
 
