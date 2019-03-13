@@ -24,4 +24,20 @@ class DefaultController extends AbstractController
         }
         return new Response('');
     }
+
+    /**
+     * @Route("/login")
+     */
+    public function loginAction()
+    {
+        return new RedirectResponse($this->generateUrl('sonata_user_admin_security_login'));
+    }
+
+    /**
+     * @Route("/logout")
+     */
+    public function logoutAction()
+    {
+        return new RedirectResponse($this->generateUrl('sonata_user_admin_security_logout'));
+    }
 }
