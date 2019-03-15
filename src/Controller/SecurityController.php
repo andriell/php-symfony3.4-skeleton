@@ -9,15 +9,10 @@
 namespace App\Controller;
 
 use Gregwar\Captcha\CaptchaBuilder;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use Symfony\Component\Routing\Annotation\Route;
 
 class SecurityController extends AbstractController
 {
-    /**
-     * @Route("/security/captcha")
-     */
     public function captchaAction()
     {
         $builder = new CaptchaBuilder();

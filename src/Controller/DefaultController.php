@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Created by PhpStorm.
@@ -14,9 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class DefaultController extends AbstractController
 {
-    /**
-     * @Route("/")
-     */
     public function indexAction()
     {
         if ($this->isGranted('ROLE_ADMIN')) {
@@ -25,17 +21,11 @@ class DefaultController extends AbstractController
         return new Response('');
     }
 
-    /**
-     * @Route("/login")
-     */
     public function loginAction()
     {
         return new RedirectResponse($this->generateUrl('sonata_user_admin_security_login'));
     }
 
-    /**
-     * @Route("/logout")
-     */
     public function logoutAction()
     {
         return new RedirectResponse($this->generateUrl('sonata_user_admin_security_logout'));

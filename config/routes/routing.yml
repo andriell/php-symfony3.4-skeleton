@@ -1,0 +1,21 @@
+# DefaultController
+app_default_index:
+    path:     /
+    defaults: { _controller: App\Controller\DefaultController::indexAction }
+    methods:  [GET]
+
+app_default_login:
+    path:     /login
+    defaults: { _controller: App\Controller\DefaultController::loginAction }
+    methods:  [GET, POST]
+
+app_default_logout:
+    path:     /logout
+    defaults: { _controller: App\Controller\DefaultController::logoutAction }
+    methods:  [GET, POST]
+
+# SecurityController
+app_security_captcha:
+    path:     /security/captcha
+    defaults: { _controller: App\Controller\SecurityController:captchaAction }
+    methods:  [GET]

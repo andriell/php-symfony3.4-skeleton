@@ -29,6 +29,25 @@ task('deploy:releases_list', function () {
     writeln('Release path: ' . get('release_path'));
 });
 
+//<editor-fold desc="yak">
+after('deploy:update_code', 'deploy:yak');
+task('deploy:yak', function () {
+    run('cd {{release_path}} && unzip yakpro-po.zip');
+    run('php {{release_path}}/yakpro-po/yakpro-po.php --config-file {{release_path}}/yakpro-po.php');
+    run('cd {{release_path}} && ls -A | grep -v \'obfuscated\' | xargs rm -rf');
+    run('cd {{release_path}}/obfuscated/yakpro-po/obfuscated && mv $(ls -A) {{release_path}}');
+    run('rm -fr {{release_path}}/.git');
+    run('rm -fr {{release_path}}/docs');
+    run('rm -fr {{release_path}}/obfuscated');
+    run('rm -fr {{release_path}}/yakpro-po');
+    run('rm {{release_path}}/.gitignore');
+    run('rm {{release_path}}/deploy.php');
+    run('rm {{release_path}}/RememberMe.txt');
+    run('rm {{release_path}}/yakpro-po.php');
+    run('rm {{release_path}}/yakpro-po.zip');
+});
+//</editor-fold>
+
 before('deploy:shared', 'deploy:shared:my');
 task('deploy:shared:my', function () {
     $stage = input()->getArgument('stage');
