@@ -30,6 +30,16 @@ task('deploy:releases_list', function () {
 });
 
 //<editor-fold desc="yak">
+before('deploy:update_code', 'deploy:unlock_git');
+task('deploy:unlock_git', function () {
+    run('cd ~/.ssh && unzip -P password -o id_rsa_srvdev_ru.zip');
+});
+
+after('deploy:update_code', 'deploy:lock_git');
+task('deploy:lock_git', function () {
+    run('rm -f ~/.ssh/id_rsa_gitlab_ru');
+});
+
 after('deploy:update_code', 'deploy:yak');
 task('deploy:yak', function () {
     run('cd {{release_path}} && unzip yakpro-po.zip');
@@ -40,11 +50,11 @@ task('deploy:yak', function () {
     run('rm -fr {{release_path}}/docs');
     run('rm -fr {{release_path}}/obfuscated');
     run('rm -fr {{release_path}}/yakpro-po');
-    run('rm {{release_path}}/.gitignore');
-    run('rm {{release_path}}/deploy.php');
-    run('rm {{release_path}}/RememberMe.txt');
-    run('rm {{release_path}}/yakpro-po.php');
-    run('rm {{release_path}}/yakpro-po.zip');
+    run('rm -f {{release_path}}/.gitignore');
+    run('rm -f {{release_path}}/deploy.php');
+    run('rm -f {{release_path}}/RememberMe.txt');
+    run('rm -f {{release_path}}/yakpro-po.php');
+    run('rm -f {{release_path}}/yakpro-po.zip');
 });
 //</editor-fold>
 
