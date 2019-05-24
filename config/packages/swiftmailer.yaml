@@ -1,7 +1,7 @@
 swiftmailer:
-    default_mailer: mailer_app
+    default_mailer: default
     mailers:
-        mailer_app:
+        default:
             spool:
                 type: 'file'
                 path: '%kernel.project_dir%/var/mailer/spool'
@@ -12,7 +12,7 @@ swiftmailer:
             auth_mode: 'login'
             username: ''
             password: ''
-            sender_address: '%mailer_app_sender_address%'
+            sender_address: '%mailer_default_sender_address%'
             stream_options:
                 ssl:
                     verify_peer: false
