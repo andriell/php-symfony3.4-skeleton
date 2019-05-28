@@ -19,3 +19,8 @@ app_security_captcha:
     path:     /security/captcha
     defaults: { _controller: App\Controller\SecurityController:captchaAction }
     methods:  [GET]
+
+app_security_zero:
+    path:     /security/zero
+    defaults: { _controller: App\Controller\SecurityController:zeroAction }
+    methods:  [GET]
