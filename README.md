@@ -52,3 +52,9 @@ Symfony 3.4 and Sonata admin
     listen = /run/php-fpm/www.sock
     listen.acl_users = nginx
 
+## Docker-compose
+    docker-composer up -d
+    docker-machine ip
+    docker-composer ps
+    docker-composer down
+    
