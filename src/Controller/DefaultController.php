@@ -23,10 +23,14 @@ class DefaultController extends AbstractController
 
     public function infoAction()
     {
+        if ($this->container->has('profiler')) {
+            $this->container->get('profiler')->disable();
+        }
         ob_start();
         phpinfo();
         $r = ob_get_contents();
         ob_get_clean();
+        $r = '';
         return new Response($r);
     }
 
