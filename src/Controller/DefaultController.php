@@ -21,6 +21,15 @@ class DefaultController extends AbstractController
         return new Response('');
     }
 
+    public function infoAction()
+    {
+        ob_start();
+        phpinfo();
+        $r = ob_get_contents();
+        ob_get_clean();
+        return new Response($r);
+    }
+
     public function loginAction()
     {
         return new RedirectResponse($this->generateUrl('sonata_user_admin_security_login'));
