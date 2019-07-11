@@ -2,10 +2,9 @@ version: '3.1'
 
 services:
     nginx:
-        # используем последний стабильный образ nginx
         image: nginx:latest
         container_name: symfony_nginx
-        # маршрутизируем порты
+        restart: always
         ports:
             - 80:80
             - 443:443
@@ -23,6 +22,7 @@ services:
             context: ./docker/php
             dockerfile: Dockerfile
         container_name: symfony_php
+        restart: always
         ports:
             - 9000:9000
             - 9001:9001
@@ -32,7 +32,7 @@ services:
             - /c/server/www/php-symfony-skeleton/docker/etc/php.ini:/etc/php.ini
             - /c/server/www/php-symfony-skeleton/var/log/php-fpm:/var/log/php-fpm
         environment:
-            XDEBUG_CONFIG: remote_host=192.168.99.1 remote_enable=1 remote_port=9001
+            XDEBUG_CONFIG: remote_host=192.168.99.1 remote_enable=1 remote_port=9001 remote_log=/var/log/php-fpm/xdebug.log
         links:
             - mysql
         networks:
@@ -40,7 +40,6 @@ services:
     mysql:
         image: mysql:5.7
         container_name: symfony_mysql
-        restart: always
         volumes:
               - symfony_mysql_volume:/var/lib/mysql
         restart: always
