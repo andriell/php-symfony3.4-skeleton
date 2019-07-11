@@ -33,6 +33,7 @@ services:
             - /c/server/www/php-symfony-skeleton/var/log/php-fpm:/var/log/php-fpm
         environment:
             XDEBUG_CONFIG: remote_host=192.168.99.1 remote_enable=1 remote_port=9001 remote_log=/var/log/php-fpm/xdebug.log
+            PHP_IDE_CONFIG: serverName=DockerSymfony
         links:
             - mysql
         networks:

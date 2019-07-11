@@ -17,33 +17,28 @@ Symfony 3.4 and Sonata admin
 
 ## Nginx settings
 
-    # File: /etc/nginx/conf.d/server.com.conf
+    # File: /etc/nginx/conf.d/symfony.conf
     server {
-            listen       80;
-            server_name  ~^server\.com$;
-            root /var/www/server.com/current/public;
-            index  index.php index.html index.htm;
+        listen       80 default_server;
+        server_name  _;
+        root /var/www/symfony/current/public;
+        index  index.php index.html index.htm;
     
-            location / {
-                    try_files $uri /index.php$is_args$args;
-            }
+        location / {
+            try_files $uri /index.php$is_args$args;
+        }
     
-            location ~ ^/index\.php(/|$) {
-                    fastcgi_pass unix:/run/php-fpm/www.sock;
-                    fastcgi_split_path_info ^(.+\.php)(/.*)$;
-                    include fastcgi_params;
-                    fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
-                    fastcgi_param DOCUMENT_ROOT $realpath_root;
-                    internal;
-            }
+        location ~ \.php$ {
+            # fastcgi_pass unix:/run/php-fpm/www.sock;
+            fastcgi_pass php:9000;
+            fastcgi_split_path_info ^(.+\.php)(/.*)$;
+            include fastcgi_params;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        }
     
-            location ~ \.php$ {
-                    return 404;
-            }
-    
-            location ~ /\.(ht|svn|git|idea) {
-                    deny all;
-            }
+        location ~ /\.(ht|svn|git|idea) {
+            deny all;
+        }
     }
 
 ## PHP settings
@@ -57,4 +52,11 @@ Symfony 3.4 and Sonata admin
     docker-machine ip
     docker-composer ps
     docker-composer down
-    
+
+## Debugging PHP Scripts
+
+Press button start listening
+
+    docker exec -it symfony_php /bin/bash
+    cd /var/www/symfony/current/
+    php bin/console app:test-db
