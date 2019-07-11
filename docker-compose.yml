@@ -25,11 +25,14 @@ services:
         container_name: symfony_php
         ports:
             - 9000:9000
+            - 9001:9001
         volumes:
             - /c/server/www/php-symfony-skeleton:/var/www/symfony/current
             - /c/server/www/php-symfony-skeleton/docker/etc/php-fpm.d/www.conf:/etc/php-fpm.d/www.conf
             - /c/server/www/php-symfony-skeleton/docker/etc/php.ini:/etc/php.ini
             - /c/server/www/php-symfony-skeleton/var/log/php-fpm:/var/log/php-fpm
+        environment:
+            XDEBUG_CONFIG: remote_host=192.168.99.1 remote_enable=1 remote_port=9001
         links:
             - mysql
         networks:
